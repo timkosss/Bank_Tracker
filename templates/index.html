@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wells Fargo Purchase Tracker</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header>
+  <h1>Purchase Tracker</h1>
+  <button id="refreshBtn">Check for new purchases</button>
+</header>
+
+<main>
+  <section id="totals">
+    <h2>By Category</h2>
+    <div id="totalsList" class="totals-list"></div>
+  </section>
+
+  <section id="transactions">
+    <h2>Recent Transactions</h2>
+    <table id="txTable">
+      <thead>
+        <tr><th>Date</th><th>Merchant</th><th>Amount</th><th>Category</th><th>Note</th></tr>
+      </thead>
+      <tbody id="txBody"></tbody>
+    </table>
+  </section>
+</main>
+
+<!-- Popup modal for categorizing a new purchase -->
+<div id="modalOverlay" class="modal-overlay hidden">
+  <div class="modal">
+    <h2>New purchase detected</h2>
+    <p id="modalMerchant" class="modal-merchant"></p>
+    <p id="modalAmount" class="modal-amount"></p>
+
+    <label for="categorySelect">Category</label>
+    <select id="categorySelect">
+      {% for c in categories %}
+      <option value="{{ c }}">{{ c }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="noteInput">Note (optional)</label>
+    <input type="text" id="noteInput" placeholder="e.g. birthday gift for Sam">
+
+    <div class="modal-actions">
+      <button id="skipBtn" class="secondary">Skip</button>
+      <button id="saveBtn" class="primary">Save</button>
+    </div>
+  </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
